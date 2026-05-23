@@ -26,33 +26,23 @@ def call_ai(message):
         "messages": message
     }
 
-    try:
 
-        response = requests.post(
+    response = requests.post(
             API_URL,
             headers=headers,
             json=data,
             timeout=40
         )
+    
+    result = response.json()
 
-        result = response.json()
+    if "choices" not in result:
+      return "AI model temporarily unavailable. Please try again."
 
-        print("OPENROUTER RESPONSE:", result, flush=True)
+    answer = result["choices"][0]["message"]["content"]
+ 
+    return answer
 
-        if "choices" not in result:
-
-            if "error" in result:
-                return f"OpenRouter Error: {result['error']}"
-
-            return "AI model temporarily unavailable. Please try again."
-
-        answer = result["choices"][0]["message"]["content"]
-
-        return answer
-
-    except Exception as e:
-
-        return f"Request Failed: {e}"
 
 def save_to_csv(question, answer):
     print("SAVE FUNCTION STARTED")

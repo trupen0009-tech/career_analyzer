@@ -6,17 +6,22 @@ const API_URL = "https://career-analyzer-nma6.onrender.com/analyze";
 
 function App() {
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [messages, setMessages] = useState([
+    {
+      role: "ai",
+      text: "Hey! Ask me your career question and I’ll guide you step by step."
+    }
+  ]);
   const [loading, setLoading] = useState(false);
 
   async function askAI() {
-    if (question.trim() === "") {
-      setAnswer("Please write a question first.");
-      return;
-    }
+    if (question.trim() === "") return;
 
+    const userQuestion = question;
+    setQuestion("");
+
+    setMessages((prev) => [...prev, { role: "user", text: userQuestion }]);
     setLoading(true);
-    setAnswer("");
 
     try {
       const response = await fetch(API_URL, {
@@ -24,41 +29,60 @@ function App() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          question: question
-        })
+        body: JSON.stringify({ question: userQuestion })
       });
 
       const data = await response.json();
 
-      if (data.answer) {
-        setAnswer(data.answer);
-      } else {
-        setAnswer(data.error || "Something went wrong.");
-      }
+      setMessages((prev) => [
+        ...prev,
+        { role: "ai", text: data.answer || data.error || "No answer received." }
+      ]);
     } catch (error) {
-      setAnswer("Backend connection failed. Check Render link.");
+      setMessages((prev) => [
+        ...prev,
+        { role: "ai", text: "Backend connection failed. Check Render link." }
+      ]);
     }
 
     setLoading(false);
   }
 
   return (
-    <div className="container">
-      <h1>AI Career Analyzer</h1>
+    <div className="page">
+      <div className="app-box">
+        <div className="header">
+          <h1>AI Career Analyzer</h1>
+          <p>Career guidance powered by AI</p>
+        </div>
 
-      <textarea
-        placeholder="Write your career question..."
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-      />
+        <div className="chat-box">
+          {messages.map((msg, index) => (
+            <div key={index} className={`message-row ${msg.role}`}>
+              <div className={`message ${msg.role}`}>
+                {msg.text}
+              </div>
+            </div>
+          ))}
 
-      <button onClick={askAI}>
-        {loading ? "Thinking..." : "Ask AI"}
-      </button>
+          {loading && (
+            <div className="message-row ai">
+              <div className="message ai">Thinking...</div>
+            </div>
+          )}
+        </div>
 
-      <div className="answer-box">
-        {answer}
+        <div className="input-box">
+          <textarea
+            placeholder="Example: I want job in AI industry"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+          />
+
+          <button onClick={askAI}>
+            Ask AI
+          </button>
+        </div>
       </div>
     </div>
   );

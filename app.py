@@ -33,22 +33,21 @@ def call_ai(message):
 
 
 def save_to_csv(question, answer):
+    print("SAVE FUNCTION STARTED")
+    print("Question:", question)
+
     save_data = {
         "Question": [question],
         "AI_Answer": [answer]
     }
 
     df = pd.DataFrame(save_data)
-    file_exists = os.path.exists(csv_path)
-    print("Saving CSV...")
-    print(df)
 
-    df.to_csv(
-        csv_path,
-        mode="a",
-        index=False,
-        header=not file_exists
-    )
+    file_exists = os.path.exists(csv_path)
+
+    df.to_csv(csv_path, mode="a", index=False, header=not file_exists)
+
+    print("CSV SAVED SUCCESSFULLY")
 
 
 def ai_career_analyzer(question):

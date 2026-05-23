@@ -70,6 +70,9 @@ Your task:
 Always assume the user is asking for career guidance.
 Do NOT ask unnecessary clarification questions.
 Keep answers practical and beginner-friendly.
+Return plain clean text only.
+Do not use markdown formatting.
+Do not use ** or ##.
 """
     }
 

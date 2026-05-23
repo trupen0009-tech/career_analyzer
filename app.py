@@ -15,6 +15,7 @@ API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 
 def call_ai(message):
+
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
@@ -25,15 +26,33 @@ def call_ai(message):
         "messages": message
     }
 
-    response = requests.post(API_URL, headers=headers, json=data, timeout=40)
-    result = response.json()
+    try:
 
-    if "choices" not in result:
-    print("OpenRouter error response:", result, flush=True)
-    return "AI model is temporarily unavailable. Please try again in a few seconds."
+        response = requests.post(
+            API_URL,
+            headers=headers,
+            json=data,
+            timeout=40
+        )
 
-    answer = result["choices"][0]["message"]["content"]
-    return answer
+        result = response.json()
+
+        print("OPENROUTER RESPONSE:", result, flush=True)
+
+        if "choices" not in result:
+
+            if "error" in result:
+                return f"OpenRouter Error: {result['error']}"
+
+            return "AI model temporarily unavailable. Please try again."
+
+        answer = result["choices"][0]["message"]["content"]
+
+        return answer
+
+    except Exception as e:
+
+        return f"Request Failed: {e}"
 
 def save_to_csv(question, answer):
     print("SAVE FUNCTION STARTED")

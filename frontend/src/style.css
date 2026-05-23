@@ -15,16 +15,32 @@ body {
   height: 100vh;
   position: relative;
   overflow: hidden;
+
   background:
-    radial-gradient(circle at top left,
-      rgba(59, 130, 246, 0.08),
-      transparent 28%),
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.12),
+      transparent 28%
+    ),
 
-    radial-gradient(circle at bottom right,
-      rgba(14, 165, 233, 0.06),
-      transparent 30%),
+    radial-gradient(
+      circle at bottom right,
+      rgba(14, 165, 233, 0.10),
+      transparent 30%
+    ),
 
-    #f8fafc;
+    radial-gradient(
+      circle at center,
+      rgba(99, 102, 241, 0.05),
+      transparent 45%
+    ),
+
+    linear-gradient(
+      135deg,
+      #f8fafc 0%,
+      #f1f5f9 45%,
+      #eef6ff 100%
+    );
 }
 
 .chat-layout {

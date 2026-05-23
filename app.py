@@ -40,6 +40,8 @@ def save_to_csv(question, answer):
 
     df = pd.DataFrame(save_data)
     file_exists = os.path.exists(csv_path)
+    print("Saving CSV...")
+    print(df)
 
     df.to_csv(
         csv_path,

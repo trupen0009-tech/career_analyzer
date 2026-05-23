@@ -27,13 +27,13 @@ def call_ai(message):
 
     response = requests.post(API_URL, headers=headers, json=data)
     result = response.json()
-    
-    answer = result["choices"][0]["message"]["content"]
+
     if "choices" not in result:
     print("OpenRouter error response:", result, flush=True)
     return "AI model is temporarily unavailable. Please try again in a few seconds."
-    return answer
 
+    answer = result["choices"][0]["message"]["content"]
+    return answer
 
 def save_to_csv(question, answer):
     print("SAVE FUNCTION STARTED")

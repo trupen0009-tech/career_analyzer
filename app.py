@@ -71,9 +71,10 @@ Your task:
 Always assume the user is asking for career guidance.
 Do NOT ask unnecessary clarification questions.
 Keep answers practical and beginner-friendly.
+Keep the answer under 120 words.
+Use simple numbered points.
+Do not use markdown symbols like **, ##, or bullet stars.
 Return plain clean text only.
-Do not use markdown formatting.
-Do not use ** or ##.
 """
     }
 

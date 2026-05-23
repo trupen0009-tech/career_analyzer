@@ -25,7 +25,7 @@ def call_ai(message):
         "messages": message
     }
 
-    response = requests.post(API_URL, headers=headers, json=data)
+    response = requests.post(API_URL, headers=headers, json=data, timeout=40)
     result = response.json()
 
     if "choices" not in result:

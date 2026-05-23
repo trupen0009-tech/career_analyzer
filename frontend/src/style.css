@@ -3,24 +3,119 @@ body {
   font-family: Arial, sans-serif;
   background: #020617;
   color: white;
+}
 
+.page {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  min-height: 100vh;
+  padding: 30px;
+  background:
+    radial-gradient(circle at top left, #1d4ed8 0, transparent 35%),
+    radial-gradient(circle at bottom right, #7c3aed 0, transparent 35%),
+    #020617;
 }
 
-.container {
+.app-box {
+  width: 100%;
+  max-width: 900px;
+  height: 85vh;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.header {
+  padding: 24px;
   text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-h1 {
-  font-size: 52px;
+.header h1 {
+  margin: 0;
+  font-size: 38px;
   color: #60a5fa;
 }
 
-p {
-  font-size: 20px;
+.header p {
+  margin: 8px 0 0;
   color: #cbd5e1;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.message-row {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.ai {
+  justify-content: flex-start;
+}
+
+.message {
+  max-width: 75%;
+  padding: 16px 18px;
+  border-radius: 20px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background: #2563eb;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.message.ai {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-bottom-left-radius: 5px;
+}
+
+.input-box {
+  padding: 18px;
+  display: flex;
+  gap: 12px;
+  background: #020617;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+textarea {
+  flex: 1;
+  height: 55px;
+  resize: none;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 15px;
+  font-size: 16px;
+}
+
+button {
+  width: 110px;
+  border: none;
+  border-radius: 16px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
 }

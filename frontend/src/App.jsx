@@ -2,6 +2,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./style.css";
 
+const API_URL = "https://career-analyzer-nma6.onrender.com/analyze";
+
 function App() {
   return (
     <div>

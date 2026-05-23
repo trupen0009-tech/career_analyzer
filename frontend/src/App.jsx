@@ -117,7 +117,7 @@ function App() {
 
         {!conversationStarted && (
           <div className="hero">
-            <h1>AI Career Analyzer</h1>
+            <h3>AI Career Copilot</h3>
             <p>Ask Anything</p>
           </div>
         )}
